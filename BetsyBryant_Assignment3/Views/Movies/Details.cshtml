@@ -1,0 +1,95 @@
+﻿@model BetsyBryant_Assignment3.Models.MovieDetailsVM
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.movie.MovieTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.movie.MovieTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.movie.MovieIMDBLink)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.movie.MovieIMDBLink)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.movie.MovieGenre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.movie.MovieGenre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.movie.YearOfRelease)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.movie.YearOfRelease)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.movie.Poster)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.movie.Poster != null)
+            {
+                <img width="100" height="100" src="@Url.Action("GetMoviePoster","Movies", new{Model.movie.MovieId})" />
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.movie.MovieId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<div>
+    Average Tweet Sentiment:
+    @if (Model.AverageTweetSentiment() != 0)
+    {
+        <span>@string.Format("{0:n2}",Math.Abs(Model.AverageTweetSentiment()) * 100)%</span>
+    }
+
+    @if (Model.AverageTweetSentiment() > 0)
+    {
+        <span>Positive</span>
+    }
+    else if (Model.AverageTweetSentiment() < 0)
+    {
+        <span>Positive</span>
+    }
+    else
+    {
+        <span>Neutral</span>
+    }
+</div>
+<table class="table"
+    <thead>
+        <tr>
+            <th>
+                Sentiment
+            </th>
+            <th>
+                Tweet
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var tweet in Model.Tweets)
+        {
+            <tr>
+                <th>
+                    @tweet.Sentiment
+                </th>
+                <th>
+                    @tweet.TweetText
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
