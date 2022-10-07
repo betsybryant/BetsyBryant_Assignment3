@@ -15,5 +15,24 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: cadetblue;
+}
+
+#twitterBird {
+    height: 300px;
+    width: 300px;
+}
+
+#IMDBLogo{
+    height: 200px;
+    width: 300px;
+}
+
+#twitterBird1 {
+    height: 300px;
+    width: 300px;
+}
+
+#IMDBLogo1 {
+    height: 200px;
+    width: 300px;
 }
